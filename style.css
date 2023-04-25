@@ -4,6 +4,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: 'Raleway', sans-serif ;
 }
 
 .player-panel {
@@ -82,8 +83,53 @@ table tr td:last-child {
     background-color: rgba(0, 0, 0, 0.5);
     width: 350px;
     position: absolute;
+    transform: scaleX(0.0);
+    transition: transform 225ms ease-in-out;
+    z-index: 1;
 }
 
 .make-vertical {
-    transform: rotate(90deg);
+    transform: rotate(90deg) scaleX(0.0);;
+}
+
+.postion-rel {
+    position: relative;
+}
+
+.game-over-img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 2;
+    animation: zoomIn 225ms ease-in-out;
+}
+
+@keyframes zoomIn {
+
+    from{
+        opacity: 0;
+        transform: scale(0);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.restart-button {
+    border: 1px solid rgba(0, 0, 0, 0.5) ;
+    background-color: #1C0B7F;
+    z-index: 2;
+    width: 300px;
+    height: 100px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 60px;
+}
+
+.restart-button:hover {
+    background-color: rgb(59, 40, 168);
 }
