@@ -6,12 +6,12 @@ function fillShape(id) {
     if (!fields[id] && !gameOver) {
         if (currentShape == 'cross') {
             currentShape = 'circle';
-            document.getElementById('player-1').classList.remove('player-inactive');
-            document.getElementById('player-2').classList.add('player-inactive');
-        } else {
-            currentShape = 'cross';
             document.getElementById('player-2').classList.remove('player-inactive');
             document.getElementById('player-1').classList.add('player-inactive');
+        } else {
+            currentShape = 'cross';
+            document.getElementById('player-1').classList.remove('player-inactive');
+            document.getElementById('player-2').classList.add('player-inactive');
         }
         fields[id] = currentShape;
 
@@ -28,13 +28,15 @@ function draw() {
         if (fields[i] == 'cross') {
             document.getElementById(`cross-${i}`).classList.remove('d-none');
         }
-
     }
 }
 
 function restart() {
     gameOver = false ;
     fields = [] ;
+    currentShape = 'cross' ;
+    document.getElementById('player-2').classList.add('player-inactive');
+    document.getElementById('player-1').classList.remove('player-inactive');
     document.getElementById('game-over').classList.add('d-none') ;
     document.getElementById('restart-button').classList.add('d-none') ;
     for (let i = 0; i < 8; i++) {
@@ -49,8 +51,19 @@ function restart() {
 }
 
 function checkForWin() {
+
+    if ((checkFromLine0To2() || checkFromLine3To5() || checkFromLine6To7()) || (fields.length == 9 && gameOver == false)) {
+        gameOver = true ;
+        //verzögert ausführen
+        setTimeout(function(){
+            document.getElementById('game-over').classList.remove('d-none') ;
+            document.getElementById('restart-button').classList.remove('d-none') ;
+        },1000) ;
+    }
+}
+
+function checkFromLine0To2() {
     let winner;
-    //first row
     if (fields[0] == fields[1] && fields[1] == fields[2] && fields[0]) {
         winner = fields[0];
         document.getElementById('line-0').style.transform = 'scaleX(1.0)' ;
@@ -65,7 +78,11 @@ function checkForWin() {
         winner = fields[6];
         document.getElementById('line-2').style.transform = 'scaleX(1.0)' ;
     }
+    return winner ;
+}
 
+function checkFromLine3To5() {
+    let winner;
     if (fields[0] == fields[3] && fields[3] == fields[6] && fields[0]) {
         winner = fields[0];
         document.getElementById('line-3').style.transform = 'rotate(90deg) scaleX(1.0)' ;
@@ -80,7 +97,11 @@ function checkForWin() {
         winner = fields[2];
         document.getElementById('line-5').style.transform = 'rotate(90deg) scaleX(1.0)' ;
     }
+    return winner ;
+}
 
+function checkFromLine6To7() {
+    let winner;
     if (fields[0] == fields[4] && fields[4] == fields[8] && fields[0]) {
         winner = fields[0];
         document.getElementById('line-6').style.transform = 'rotate(45deg) scaleX(1.2)' ;
@@ -90,13 +111,5 @@ function checkForWin() {
         winner = fields[2];
         document.getElementById('line-7').style.transform = 'rotate(-45deg) scaleX(1.2)' ;
     }
-    if (winner) {
-        gameOver = true ;
-        //verzögert ausführen
-        setTimeout(function(){
-            document.getElementById('game-over').classList.remove('d-none') ;
-            document.getElementById('restart-button').classList.remove('d-none') ;
-        },1000) ;
-        
-    }
+    return winner ;
 }

@@ -13,30 +13,32 @@
 
 <body>
     <img class="game-over-img d-none" id="game-over" src="./img/game-over.png">
-    <button class="restart-button d-none" id="restart-button"  onclick="restart()">Restart</button>
+    <button class="restart-button d-none" id="restart-button" onclick="restart()">Restart</button>
     <div class="player-panel">
-        <div class="player-inactive" id="player-1">
+        <div class="player" id="player-1">
             <img id="" class="" src="./img/circle.png">Player 1
         </div>
-        <div id="player-2">
+        <div class="player player-inactive" id="player-2">
             <img id="" class="" src="./img/cross.png"> Player 2
         </div>
     </div>
 
     <table>
         <div class="postion-rel">
-            <div id="line-0" class="horizontal-line" style="top: 61px; left: -176px;"></div>
-            <div id="line-1" class="horizontal-line" style="top: 202px; left: -176px;"></div>
-            <div id="line-2" class="horizontal-line" style="top: 341px; left: -176px;"></div>
-            <div id="line-3" class="horizontal-line make-vertical" style="top: 201px; left: -317px;"></div>
-            <div id="line-4" class="horizontal-line make-vertical" style="top: 201px; left: -176px;"></div>
-            <div id="line-5" class="horizontal-line make-vertical" style="top: 201px; left: -36px;"></div>
-            <div id="line-6" class="horizontal-line" style="top: 201px; left: -177px; transform: rotate(45deg) scaleX(0.0);"></div>
-            <div id="line-7" class="horizontal-line" style="top: 201px; left: -177px; transform: rotate(-45deg) scaleX(0.0);"></div>
+            <div id="line-0" class="line-0 horizontal-line" style="top: 61px; left: -176px;"></div>
+            <div id="line-1" class="line-1 horizontal-line" style="top: 202px; left: -176px;"></div>
+            <div id="line-2" class="line-2 horizontal-line" style="top: 341px; left: -176px;"></div>
+            <div id="line-3" class="line-3 horizontal-line make-vertical" style="top: 201px; left: -317px;"></div>
+            <div id="line-4" class="line-4 horizontal-line make-vertical" style="top: 201px; left: -176px;"></div>
+            <div id="line-5" class="line-5 horizontal-line make-vertical" style="top: 201px; left: -36px;"></div>
+            <div id="line-6" class="line-6 horizontal-line"
+                style="top: 201px; left: -177px; transform: rotate(45deg) scaleX(0.0);"></div>
+            <div id="line-7" class="line-7 horizontal-line"
+                style="top: 201px; left: -177px; transform: rotate(-45deg) scaleX(0.0);"></div>
             <tr>
                 <td onclick="fillShape(0)">
-                    <img id="circle-0" class="shape d-none" src="./img/circle.png">
-                    <img id="cross-0" class="shape d-none" src="./img/cross.png">
+                        <img id="circle-0" class="shape d-none" src="./img/circle.png">
+                        <img id="cross-0" class="shape d-none" src="./img/cross.png">
                 </td>
                 <td onclick="fillShape(1)">
                     <img id="circle-1" class="shape d-none" src="./img/circle.png">
