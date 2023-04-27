@@ -1,22 +1,30 @@
 let fields = [];
 let gameOver = false ;
 let currentShape = 'cross';
+let counter = 0 ;
 
 function fillShape(id) {
     if (!fields[id] && !gameOver) {
         if (currentShape == 'cross') {
             currentShape = 'circle';
-            document.getElementById('player-2').classList.remove('player-inactive');
-            document.getElementById('player-1').classList.add('player-inactive');
+            activatePlayer('player1');
         } else {
             currentShape = 'cross';
-            document.getElementById('player-1').classList.remove('player-inactive');
-            document.getElementById('player-2').classList.add('player-inactive');
+            activatePlayer('player2');   
         }
         fields[id] = currentShape;
-
         draw();
         checkForWin();
+    }
+}
+
+function activatePlayer(player){
+    if (player == 'player1') {
+        document.getElementById('player-2').classList.remove('player-inactive');
+        document.getElementById('player-1').classList.add('player-inactive');
+    } else if (player == 'player2') {
+        document.getElementById('player-1').classList.remove('player-inactive');
+        document.getElementById('player-2').classList.add('player-inactive');
     }
 }
 
@@ -35,10 +43,8 @@ function restart() {
     gameOver = false ;
     fields = [] ;
     currentShape = 'cross' ;
-    document.getElementById('player-2').classList.add('player-inactive');
-    document.getElementById('player-1').classList.remove('player-inactive');
-    document.getElementById('game-over').classList.add('d-none') ;
-    document.getElementById('restart-button').classList.add('d-none') ;
+    counter = 0 ;
+    resetIcons() ;
     for (let i = 0; i < 8; i++) {
         const number = i;
         document.getElementById(`line-${number}`).style.transform = 'scaleX(0.0)' ;
@@ -50,9 +56,16 @@ function restart() {
     }
 }
 
-function checkForWin() {
+function resetIcons() {
+    document.getElementById('player-2').classList.add('player-inactive');
+    document.getElementById('player-1').classList.remove('player-inactive');
+    document.getElementById('game-over').classList.add('d-none') ;
+    document.getElementById('restart-button').classList.add('d-none') ;
+}
 
-    if ((checkFromLine0To2() || checkFromLine3To5() || checkFromLine6To7()) || (fields.length == 9 && gameOver == false)) {
+function checkForWin() {
+    counter++ ;
+    if ((checkFromLine0To2() || checkFromLine3To5() || checkFromLine6To7()) || (counter == 9 && gameOver == false)) {
         gameOver = true ;
         //verzögert ausführen
         setTimeout(function(){
@@ -60,6 +73,7 @@ function checkForWin() {
             document.getElementById('restart-button').classList.remove('d-none') ;
         },1000) ;
     }
+    
 }
 
 function checkFromLine0To2() {
